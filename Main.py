@@ -4,6 +4,7 @@ import math
 import pickle
 from multilayer_perceptron import MultilayerPerceptron
 
+# The main function, the first called in the application
 def main():
 	# Default learning rate, tuple with the amount of units/neurons per layer
 	mlp = MultilayerPerceptron(constant.STD_LEARNING_RATE, constant.STD_UNITS_PER_LAYER, constant.STD_EXPECTED_OUTPUT)
@@ -26,8 +27,7 @@ def main():
 
 # mlp: Multilayer Perceptron model
 # training_data_list: a list of tuples containing (feature vector, expected letter) for training
-# validation_data_list: a list of tuples containing (feature vector, expected letter) for validation
-# this function will train the model with the available training data from "processed_images/training" folder
+# this function will train the model with the available training data from "processed_images/training" folder until max_epoch
 def train_mlp(mlp, training_data_list, max_epoch):
 	# Debug on console to know the training is starting
 	print("=== Start of training ===")
@@ -67,7 +67,7 @@ def get_mse(error_list_from_this_epoch):
 	mse = total_sqrd_error_sum/total_amount_of_errors
 	return mse
 
-# Get model accuracy
+# Get model accuracy and debug print on console some useful information
 def get_model_accuracy_with_validation_set(model, validation_data_list):
 	correct_predictions = 0
 	z_correct = 0
@@ -97,8 +97,10 @@ def get_model_accuracy_with_validation_set(model, validation_data_list):
 	return accuracy
 
 
-# There are 600 images for training (200 per letter)
+# There are 600 images for validation (200 per letter)]
+# training_set_range: Number of images per letter in training set
 # validation_set_range: Number of images per letter in training set
+# the validation images are number in the interval: [training_set_range, validation_set_range)
 # Return a list of tuples containing (feature vector, expected letter) for validation
 def create_validation_data_list(training_set_range, validation_set_range):
 	validation_data_list = []
@@ -121,6 +123,7 @@ def create_training_data_list(training_set_range):
 	# Return a list of tuples containing (feature vector, expected letter) for training
 	return training_data_list
 
+# This function is used to to help building the name of the processed image for pickle to load
 # Convert a integer (ex.: 1) to a string version with 0's to the left (ex.: "0001")
 def process_number_to_string(num):
 	# Convert i to a string called string_i
