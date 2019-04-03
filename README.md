@@ -6,6 +6,6 @@ This was a project developed for Artificial Intelligence classes during my Bache
 * The learning rate was defaulted to 0.1, and the weights and bias are randomized between -0.5 and 0.5.
 * The project was developed in Python.
 * (Outside the commited project) The image of a letter (.PNG format from /unprocessed_images/) was converted into a Histogram of Oriented Gradients (from scikit-image.feature.hog).
-* The neural network training is validated by the k-fold cross-validation procedure (800 images, per letter, for the training set and 200 images, per letter, for the validating set).
+* The neural network has 800 images, per letter, for the training set and 200 images, per letter, for the validating set.
 
 <img src="pictures/multilayer_perceptron.PNG" width="500">
