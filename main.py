@@ -2,6 +2,7 @@ import random
 import constant
 import math
 import pickle
+import time
 from multilayer_perceptron import MultilayerPerceptron
 
 # The main function, the first called in the application
@@ -37,6 +38,7 @@ def train_mlp(mlp, training_data_list, max_epoch):
 		# training_data_list[j][1]: Expected letter for the feature vector
 		# error_from_this_epoch: Error list from all units/neurons from the output layer during the current epoch
 		error_list_from_this_epoch = []
+		start = time.time()
 		for j in range(len(training_data_list)):
 			# Introduce the feature vector to the input layer
 			mlp.introduce_data_to_input_layer(training_data_list[j][0])
@@ -49,9 +51,10 @@ def train_mlp(mlp, training_data_list, max_epoch):
 			# error_from_this_input: Error list from all units/neurons from the output layer during the current input
 			error_from_this_input = mlp.compute_error_and_adjust_weights(training_data_list[j][1])
 			error_list_from_this_epoch.append(error_from_this_input)
-		# Debug on console to know the elapsed epoch and the total error from it
+		# Debug on console to know the elapsed epoch, its elapsed time and the total error from it
 		# This is the MSE from output units
-		print("Epoch "+str(i)+", mean squared error: "+str(get_mse(error_list_from_this_epoch)))
+		end = time.time()
+		print("Epoch "+str(i)+", mean squared error: "+str(get_mse(error_list_from_this_epoch))+", elapsed time: {0:.2f}".format(end-start)+"s")
 	print("=== End of training ===")
 	return mlp
 
